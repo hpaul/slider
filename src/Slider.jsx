@@ -328,7 +328,7 @@ class Slider extends React.Component {
   render() {
     const {handle, upperBound, lowerBound} = this.state;
     const {className, prefixCls, disabled, vertical, dots, included, range, step,
-      marks, max, min, tipTransitionName, tipFormatter, children} = this.props;
+      marks, max, min, tipTransitionName, tipFormatter, children, alwaysShowTip} = this.props;
 
     const upperOffset = this.calcOffset(upperBound);
     const lowerOffset = this.calcOffset(lowerBound);
@@ -337,13 +337,13 @@ class Slider extends React.Component {
     const isNoTip = (step === null) || (tipFormatter === null);
 
     const upper = (<Handle className={handleClassName}
-                           noTip={isNoTip} tipTransitionName={tipTransitionName} tipFormatter={tipFormatter}
+                           noTip={isNoTip} tipTransitionName={tipTransitionName} tipFormatter={tipFormatter} alwaysShowTip={alwaysShowTip}
                            vertical = {vertical} offset={upperOffset} value={upperBound} dragging={handle === 'upperBound'}/>);
 
     let lower = null;
     if (range) {
       lower = (<Handle className={handleClassName}
-                       noTip={isNoTip} tipTransitionName={tipTransitionName} tipFormatter={tipFormatter}
+                       noTip={isNoTip} tipTransitionName={tipTransitionName} tipFormatter={tipFormatter} alwaysShowTip={alwaysShowTip}
                        vertical = {vertical} offset={lowerOffset} value={lowerBound} dragging={handle === 'lowerBound'}/>);
     }
 
@@ -401,6 +401,7 @@ Slider.propTypes = {
   range: React.PropTypes.bool,
   vertical: React.PropTypes.bool,
   allowCross: React.PropTypes.bool,
+  alwaysShowTip: React.PropTypes.bool,
 };
 
 Slider.defaultProps = {
@@ -421,6 +422,7 @@ Slider.defaultProps = {
   range: false,
   vertical: false,
   allowCross: true,
+  alwaysShowTip: false,
 };
 
 export default Slider;
